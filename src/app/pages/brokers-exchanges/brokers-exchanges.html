@@ -1,0 +1,149 @@
+<div class="broker-page">
+
+  <div class="broker-header">
+    <h2>Brokers <span>2</span></h2>
+
+    <div class="broker-actions">
+      <button class="add-btn" (click)="openBrokerModal()">+ Add Broker</button>
+      <!-- <button class="export-btn">⇩ Export Csv</button> -->
+      <button class="export-btn"  routerLink="/dashboard">DashBoard</button>
+    </div>
+  </div>
+
+  <div class="broker-card simple-card">
+    <div class="broker-avatar orange">TP</div>
+
+    <div class="broker-info">
+      <h3>TT Paper Trading</h3>
+      <p>NASDAQ-EQ, Crypto, FX, BITBNS, NSE, CDS, NFO, MCX, NSE IDX</p>
+    </div>
+  </div>
+
+  <div class="broker-card">
+
+    <div class="card-top">
+      <div class="broker-avatar yellow">U</div>
+
+      <div class="broker-info">
+        <h3>Upstox</h3>
+        <p>CDS, MCX, NFO, NSE</p>
+      </div>
+
+      <div class="card-icons">
+        <button>✎</button>
+        <button>🗑</button>
+      </div>
+    </div>
+
+    <div class="broker-tools">
+      <select>
+        <option>1 Month - Rs. 100</option>
+        <option>3 Months - Rs. 250</option>
+      </select>
+
+      <button class="static-btn">🛡 Buy Static IP</button>
+    </div>
+
+    <div class="updated">
+      Last Updated: <b>Feb 08, 06:44</b>
+    </div>
+
+    <div class="info-box">
+      <h4>Info</h4>
+      <p>
+        Upstox expects the user to login here everyday to renew their API token.
+        If not done, the trades will get rejected.
+      </p>
+
+      <a href="#">
+        https://upstox.tradetron.tech/auth/891215
+      </a>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="broker-modal-overlay" *ngIf="showBrokerModal">
+
+  <div class="broker-modal">
+
+    <div class="modal-header">
+      <h2>Manage Broker</h2>
+      <button type="button" (click)="closeBrokerModal()">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="field-group">
+        <label>Select Broker <span>*</span></label>
+
+        <select [(ngModel)]="selectedBroker">
+          <option value="">Select Broker</option>
+
+          <option *ngFor="let broker of brokersList" [value]="broker">
+            {{ broker }}
+          </option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label>Exchanges <span>*</span></label>
+
+        <div class="custom-multi-select">
+
+          <div class="multi-select-header" (click)="toggleExchangeDropdown()">
+            <span *ngIf="selectedExchanges.length === 0">
+              Select Exchanges
+            </span>
+
+            <span *ngIf="selectedExchanges.length > 0">
+              {{ selectedExchanges.length }} Exchanges Selected
+            </span>
+
+            <b>▾</b>
+          </div>
+
+          <div class="multi-select-menu" *ngIf="showExchangeDropdown">
+
+            <label class="multi-option" *ngFor="let exchange of exchangeList">
+              <input
+                type="checkbox"
+                [checked]="selectedExchanges.includes(exchange)"
+                (change)="toggleExchange(exchange)">
+
+              <span>{{ exchange }}</span>
+            </label>
+
+          </div>
+
+        </div>
+      </div>
+
+      <button class="save-broker-btn" type="button" (click)="saveBroker()">
+        Save Broker
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="error-dialog-overlay" *ngIf="showErrorDialog">
+
+  <div class="error-dialog">
+
+    <div class="error-icon">!</div>
+
+    <h3>Error</h3>
+
+    <p>{{ errorMessage }}</p>
+
+    <button type="button" (click)="closeErrorDialog()">
+      OK
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,131 @@
+<div class="users-page">
+
+  <app-message
+    type="success"
+    [message]="successMessage"
+    [showDashboardButton]="true"
+    (dashboardClick)="goDashboard()">
+  </app-message>
+
+  <app-message
+    type="error"
+    [message]="errorMessage"
+    [showDashboardButton]="true"
+    (dashboardClick)="goDashboard()">
+  </app-message>
+
+  <div class="page-header">
+    <div>
+      <span class="page-badge">TradeTron Admin</span>
+      <h1>User Management</h1>
+      <p>Create, edit and manage platform login users professionally.</p>
+    </div>
+
+    <button class="dashboard-btn" (click)="goDashboard()">
+      Dashboard
+    </button>
+  </div>
+
+  <div class="content-grid">
+
+    <div class="card form-card">
+      <div class="card-title">
+        <div>
+          <h2>{{ editIndex !== null ? 'Edit User' : 'Create User' }}</h2>
+          <p>{{ editIndex !== null ? 'Update selected user details' : 'Add new dashboard user' }}</p>
+        </div>
+      </div>
+
+      <form (ngSubmit)="saveUser()">
+
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="user.name" name="name" placeholder="Enter user name">
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="user.email" name="email" placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" [(ngModel)]="user.password" name="password" placeholder="Enter password">
+        </div>
+
+        <div class="form-group">
+          <label>Mobile</label>
+          <input type="text" [(ngModel)]="user.mobile" name="mobile" placeholder="Enter mobile number">
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select [(ngModel)]="user.status" name="status">
+            <option value="1">Active</option>
+            <option value="0">Blocked</option>
+          </select>
+        </div>
+
+        <button type="submit" class="save-btn">
+          {{ editIndex !== null ? 'Update User' : 'Save User' }}
+        </button>
+
+        <button type="button" class="cancel-btn" *ngIf="editIndex !== null" (click)="resetForm()">
+          Cancel Edit
+        </button>
+
+      </form>
+    </div>
+
+    <div class="card table-card">
+      <div class="table-header">
+        <div>
+          <h2>Users List</h2>
+          <p>Total users: {{ users.length }}</p>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of users; let i = index">
+            <td>
+              <div class="user-name">
+                <span>{{ item.name.charAt(0) }}</span>
+                {{ item.name }}
+              </div>
+            </td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.mobile }}</td>
+            <td>
+              <span class="badge" [class.blocked]="item.status === 'Blocked'">
+                {{ item.status }}
+              </span>
+            </td>
+            <td class="action-buttons">
+              <button class="edit-btn" (click)="editUser(item, i)">Edit</button>
+              <button class="delete-btn" (click)="deleteUser(i)">Delete</button>
+            </td>
+          </tr>
+
+          <tr *ngIf="users.length === 0">
+            <td colspan="5" class="no-data">
+              No users found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

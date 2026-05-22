@@ -1,0 +1,96 @@
+<div class="profile-page">
+
+  <main class="profile-card">
+
+    <div class="profile-title">
+      <div>
+        <h2>Profile Settings</h2>
+        <p>Update your personal information and account details</p>
+      </div>
+
+        <button class="logout-btn" routerLink="/dashboard"> DashBoard </button>
+    </div>
+
+    <div class="profile-banner">
+      <div>
+        <h1>Welcome Back</h1>
+        <p>Manage your Tradetron profile professionally</p>
+      </div>
+    </div>
+
+    <div class="profile-content">
+
+      <div class="avatar-box">
+        <div class="avatar">✎</div>
+
+        <p>Member since</p>
+        <h3>May 19, 2026</h3>
+
+        <p>Account ID</p>
+        <h3>20262025</h3>
+      </div>
+
+      <form class="form-grid">
+
+        <div class="field">
+          <label>Name <span>*</span></label>
+          <input type="text" [(ngModel)]="profile.name" name="name">
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="profile.email" name="email" disabled>
+        </div>
+
+        <div class="field">
+          <label>Phone <span>*</span></label>
+          <input type="text" [(ngModel)]="profile.phone" name="phone" maxlength="10">
+        </div>
+
+        <div class="field">
+          <label>Address <span>*</span></label>
+          <input type="text" [(ngModel)]="profile.address" name="address">
+        </div>
+
+        <div class="field">
+          <label>Country <span>*</span></label>
+          <select [(ngModel)]="profile.country" name="country">
+            <option value="">Select Country</option>
+            <option>India</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>State <span>*</span></label>
+          <select [(ngModel)]="profile.state" name="state">
+            <option value="">Select State</option>
+            <option>Tamil Nadu</option>
+            <option>Kerala</option>
+            <option>Karnataka</option>
+            <option>Andhra Pradesh</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Profile Description</label>
+          <textarea [(ngModel)]="profile.description" name="description"></textarea>
+        </div>
+
+        <button type="button" class="save-btn" (click)="saveProfile()"> Save Profile </button>
+      </form>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="error-dialog-overlay" *ngIf="showErrorDialog">
+  <div class="error-dialog">
+    <div class="error-icon">!</div>
+    <h3>Validation Error</h3>
+    <p>{{ errorMessage }}</p>
+    <button type="button" (click)="closeErrorDialog()"> OK </button>
+</div>
+
+</div>

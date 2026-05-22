@@ -1,0 +1,673 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  overflow-x:hidden;
+  background:#eef2ff;
+}
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+.broker-page{
+
+  width:100%;
+  min-height:100vh;
+
+  padding:28px 4% 60px;
+
+  overflow-x:hidden;
+
+  background:
+  radial-gradient(circle at top left,
+  rgba(255,118,136,0.95) 0%,
+  rgba(255,118,136,0.90) 12%,
+  transparent 13%),
+
+  radial-gradient(circle at bottom right,
+  rgba(94,114,228,0.18) 0%,
+  rgba(94,114,228,0.15) 18%,
+  transparent 19%),
+
+  linear-gradient(135deg,#f7f9ff,#eef2ff);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.broker-header{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:16px;
+
+  border-bottom:1px solid #dfe6f1;
+
+  padding-bottom:14px;
+
+  gap:20px;
+}
+
+.broker-header h2{
+
+  font-size:38px;
+  font-weight:800;
+
+  color:#071b3a;
+
+  display:flex;
+  align-items:center;
+
+  gap:14px;
+}
+
+.broker-header h2 span{
+
+  font-size:15px;
+  font-weight:700;
+
+  background:#edf2ff;
+  color:#4f5df5;
+
+  padding:5px 14px;
+
+  border-radius:20px;
+}
+
+/* =========================================================
+   TOP BUTTONS
+========================================================= */
+
+.broker-actions{
+
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  margin-left:auto;
+}
+
+.broker-actions button{
+
+  height:42px;
+
+  border:none;
+  border-radius:12px;
+
+  padding:0 18px;
+
+  font-size:15px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.25s ease;
+}
+
+.broker-actions button:hover{
+  transform:translateY(-2px);
+}
+
+.add-btn{
+
+  background:linear-gradient(135deg,#5563ff,#6f7dff);
+  color:white;
+
+  box-shadow:0 10px 25px rgba(85,99,255,0.28);
+}
+
+.export-btn{
+
+  background:white;
+  color:#1f2937;
+
+  border:1px solid #d7dfea !important;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.broker-card{
+
+  width:100%;
+
+  background:rgba(255,255,255,0.72);
+
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(219,227,240,0.8);
+
+  border-radius:22px;
+
+  padding:20px;
+
+  margin-bottom:18px;
+
+  box-shadow:
+  0 12px 30px rgba(15,23,42,0.05),
+  0 2px 8px rgba(15,23,42,0.03);
+
+  transition:0.25s ease;
+}
+
+.broker-card:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+  0 18px 40px rgba(15,23,42,0.08),
+  0 4px 10px rgba(15,23,42,0.04);
+}
+
+.simple-card{
+
+  display:flex;
+  align-items:center;
+
+  gap:18px;
+}
+
+/* =========================================================
+   TOP CARD AREA
+========================================================= */
+
+.card-top{
+
+  display:flex;
+  align-items:center;
+
+  gap:18px;
+}
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.broker-avatar{
+
+  width:54px;
+  height:54px;
+
+  border-radius:50%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  color:white;
+
+  font-size:24px;
+  font-weight:800;
+
+  flex-shrink:0;
+}
+
+.orange{
+  background:linear-gradient(135deg,#f59e0b,#fbbf24);
+}
+
+.yellow{
+  background:linear-gradient(135deg,#f6bd4a,#ffcf6d);
+}
+
+/* =========================================================
+   BROKER INFO
+========================================================= */
+
+.broker-info h3{
+
+  font-size:22px;
+  font-weight:800;
+
+  color:#102044;
+
+  margin-bottom:8px;
+}
+
+.broker-info p{
+
+  font-size:15px;
+  line-height:1.6;
+
+  color:#7180a0;
+}
+
+/* =========================================================
+   ICONS
+========================================================= */
+
+.card-icons{
+
+  margin-left:auto;
+
+  display:flex;
+  align-items:center;
+
+  gap:10px;
+}
+
+.card-icons button{
+
+  width:38px;
+  height:38px;
+
+  border-radius:12px;
+
+  border:1px solid #dfe5f0;
+
+  background:white;
+
+  cursor:pointer;
+
+  transition:0.2s ease;
+}
+
+.card-icons button:hover{
+
+  background:#f4f7ff;
+
+  transform:translateY(-1px);
+}
+
+/* =========================================================
+   TOOLS
+========================================================= */
+
+.broker-tools{
+
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  border-top:1px solid #edf1f7;
+  border-bottom:1px solid #edf1f7;
+
+  padding:16px 0;
+
+  margin-top:16px;
+}
+
+.broker-tools select{
+
+  height:42px;
+  width:230px;
+
+  border:1px solid #d9e1ef;
+
+  border-radius:12px;
+
+  background:white;
+
+  padding:0 14px;
+
+  font-size:15px;
+
+  outline:none;
+}
+
+.static-btn{
+
+  height:42px;
+
+  border:none;
+  border-radius:12px;
+
+  padding:0 18px;
+
+  font-size:15px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  background:linear-gradient(135deg,#6b75ff,#8590ff);
+
+  color:white;
+
+  box-shadow:0 8px 20px rgba(107,117,255,0.25);
+}
+
+/* =========================================================
+   UPDATED
+========================================================= */
+
+.updated{
+
+  padding:14px 0;
+
+  font-size:15px;
+
+  color:#7b8499;
+
+  border-bottom:1px solid #edf1f7;
+}
+
+.updated b{
+  color:#4a5672;
+}
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.info-box{
+
+  padding-top:18px;
+}
+
+.info-box h4{
+
+  font-size:20px;
+  font-weight:700;
+
+  color:#102044;
+
+  margin-bottom:14px;
+}
+
+.info-box p{
+
+  font-size:16px;
+  line-height:1.7;
+
+  color:#44506b;
+
+  margin-bottom:16px;
+}
+
+.info-box a{
+
+  color:#5563ff;
+
+  font-size:15px;
+
+  text-decoration:none;
+
+  word-break:break-word;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:768px){
+
+  .broker-page{
+
+    padding:20px 14px 50px;
+
+    background:
+    linear-gradient(135deg,#f7f9ff,#eef2ff);
+  }
+
+  .broker-header{
+
+    flex-direction:column;
+    align-items:flex-start;
+
+    gap:14px;
+  }
+
+  .broker-header h2{
+    font-size:30px;
+  }
+
+  .broker-actions{
+
+    width:100%;
+
+    display:flex;
+  }
+
+  .broker-actions button{
+    flex:1;
+  }
+
+  .simple-card,
+  .card-top,
+  .broker-tools{
+
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .card-icons{
+    margin-left:0;
+  }
+
+  .broker-tools select,
+  .static-btn{
+
+    width:100%;
+  }
+
+  .broker-info h3{
+    font-size:20px;
+  }
+
+  .broker-info p{
+    font-size:14px;
+  }
+
+  .info-box p{
+    font-size:14px;
+  }
+}
+
+/* Add Broker Message Dailog */
+
+.broker-modal-overlay,
+.error-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(7px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.broker-modal {
+  width: 540px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5eaf3;
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+}
+
+.modal-header h2 {
+  font-size: 24px;
+  color: #102044;
+}
+
+.modal-header button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-group label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #102044;
+}
+
+.field-group label span {
+  color: red;
+}
+
+.field-group select {
+  height: 48px;
+  border: 1px solid #d6deeb;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+}
+
+.custom-multi-select {
+  position: relative;
+  width: 100%;
+}
+
+.multi-select-header {
+  height: 48px;
+  border: 1px solid #d6deeb;
+  border-radius: 12px;
+  padding: 0 14px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.multi-select-header b {
+  color: #111827;
+  font-size: 13px;
+}
+
+.multi-select-menu {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #d6deeb;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.16);
+  padding: 8px;
+  z-index: 999999;
+}
+
+.multi-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #111827;
+}
+
+.multi-option:hover {
+  background: #f3f6ff;
+}
+
+.multi-option input {
+  width: 16px;
+  height: 16px;
+  accent-color: #5f63f2;
+}
+
+.save-broker-btn {
+  margin-top: 8px;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: #5f63f2;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.error-dialog {
+  width: 360px;
+  background: white;
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+}
+
+.error-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #ef4444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 14px;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.error-dialog h3 {
+  color: #111827;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.error-dialog p {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.error-dialog button {
+  height: 42px;
+  min-width: 120px;
+  border: none;
+  border-radius: 10px;
+  background: #ef4444;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media(max-width:600px) {
+  .broker-modal,
+  .error-dialog {
+    width: 92%;
+  }
+}

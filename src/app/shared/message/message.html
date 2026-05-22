@@ -1,0 +1,27 @@
+<div
+  *ngIf="message"
+  class="toast"
+  [ngClass]="{
+    'success-toast': type === 'success',
+    'error-toast': type === 'error'
+  }"
+>
+  <div class="toast-icon">
+    <span *ngIf="type === 'success'">✅</span>
+    <span *ngIf="type === 'error'">❌</span>
+  </div>
+
+  <div class="toast-content">
+    <strong>{{ type === 'success' ? 'Success' : 'Error' }}</strong>
+    <p>{{ message }}</p>
+  </div>
+
+  <button
+    *ngIf="showDashboardButton"
+    class="toast-dashboard-btn"
+    type="button"
+    (click)="goDashboard()"
+  >
+    Dashboard
+  </button>
+</div>

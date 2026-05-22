@@ -1,0 +1,6 @@
+{
+  "name": "Angular",
+  "type": "angular-standalone",
+  "integrations": {},
+  "defaultProject": "angular-tradetrondashboard"
+}

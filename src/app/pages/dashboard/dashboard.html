@@ -1,0 +1,383 @@
+<div class="dashboard-page" [class.dark-mode]="isDarkMode">
+
+  <header class="top-header">
+    <div class="brand-center">
+      <div class="logo-text">TRADETRON</div>
+      <div class="logo-sub">ALGO STRATEGY MARKETPLACE</div>
+    </div>
+
+    <div class="header-right">
+
+      <div class="country-dropdown">
+        <div class="country-selected">
+          <img src="/icons/india.png" class="country-flag">
+          <span>IN</span>
+          <span class="arrow">▾</span>
+        </div>
+
+        <div class="country-menu">
+          <div class="country-item active-country">
+            <img src="/icons/india.png" class="country-flag">
+            <div>
+              <b>IND</b>
+              <p>Exchanges for India</p>
+            </div>
+          </div>
+
+          <div class="country-item">
+            <img src="/icons/usa.png" class="country-flag">
+            <div>
+              <b>USA</b>
+              <p>Exchanges for United States</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="upgrade-btn">Upgrade Now</button>
+
+      <div class="theme-btn" (click)="toggleTheme()">
+        {{ isDarkMode ? '☀' : '☾' }}
+      </div>    
+
+      <div class="profile-dropdown">
+
+  <div class="user-icon">
+    <img src="/icons/user.png" alt="user">
+    <span class="profile-dot"></span>
+  </div>
+
+  <div class="profile-menu">
+
+   <a routerLink="/profile">
+      <div class="menu-icon blue">
+        <img src="/icons/profile.png" alt="Profile">
+      </div>
+      <span>Profile</span>
+   </a>
+
+    <a routerLink="/subscriptions">
+        <div class="menu-icon yellow">
+        <img src="/icons/subscribe.png" alt="subscribtion">
+      </div>
+      <span>Subscriptions</span>
+   </a> 
+  
+
+    <a routerLink="/brokers-exchanges">
+      <div class="menu-icon green">
+         <img src="/icons/folders.png" alt="exchange"></div>
+      <span>Broker & Exchanges</span>
+    </a>
+
+    <a>
+      <div class="menu-icon orange">🔔</div>
+      <span>Notifications</span>
+    </a>
+
+     <a>
+        <div class="menu-icon green">
+           <img src="/icons/invoice.png" alt="Invoice"></div>
+        <span>Invoice</span>
+    </a>
+    
+
+    <a>
+      <div class="menu-icon gold">🔑</div>
+      <span>Change Password</span>
+    </a>
+
+    <a>
+      <div class="menu-icon purple">🕘</div>
+      <span>Recent Activities</span>
+    </a>
+
+     <a>
+      <div class="menu-icon green">
+         <img src="/icons/help_supp.png" alt="helpandsupport"></div>
+      <span>Help & Support</span>
+    </a>
+
+      <a>
+        <div class="menu-icon green">
+           <img src="/icons/logout.png" alt="logout"></div>
+        <span>Logout</span>
+    </a>
+
+  </div>
+
+</div>
+  </div>
+  </header>
+
+  <div class="layout">
+
+    <aside class="sidebar">    
+    
+    <a
+        routerLink="/dashboard"  routerLinkActive="sidebar-active"
+        [routerLinkActiveOptions]="{ exact: true }"  class="sidebar-link">
+        <div class="menu-icon yellow">
+          <img src="/icons/dashboard.png" alt="dashboard">
+        </div>
+        Dashboard
+    </a>
+
+     <a  routerLink="/users">
+        <div class="menu-icon yellow">
+          <img src="/icons/teamwork.png" alt="User">
+        </div>
+        User
+    </a>
+
+      <div class="side-dropdown">
+        <div class="side-link">
+          📈 Strategies <span>▾</span>
+        </div>
+        <div class="side-submenu">
+          <a>My Strategies</a>
+          <a>Deployed Strategies</a>
+          <a>Marketplace</a>
+        </div>
+      </div>
+
+      <div class="side-dropdown">
+        <div class="side-link">
+          🛠 Services <span>▾</span>
+        </div>
+        <div class="side-submenu">
+          <a>Broker Setup</a>
+          <a>API Bridge</a>
+          <a>Notifications</a>
+        </div>
+      </div>
+
+       <a>
+        <div class="menu-icon yellow"><img src="/icons/report.png" alt="report"></div>
+        Report
+      </a>
+
+      <a>
+        <div class="menu-icon yellow"><img src="/icons/settings.png" alt="setting"></div>
+        Settings
+      </a>
+
+       <a>
+        <div class="menu-icon yellow"><img src="/icons/logout.png" alt="Logout" (click)="openLogoutToast()"></div>
+        Logout
+      </a>
+
+    </aside>
+
+    <main class="main-content">
+
+      <div class="alert-box">
+        <span>🔔 Advance strategy building course start from today</span>
+        <a href="#">Enroll Now</a>
+        <button type="button">×</button>
+      </div>
+
+      <section class="dashboard-card">
+        <div class="dashboard-card-left">
+          <h2>Nifty</h2>
+
+          <div class="dashboard-stats-row">
+            <div class="dashboard-stat-item">
+              <label>Drawdown</label>
+              <strong>₹ 17.4K (69%)</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Min Capital</label>
+              <strong>₹ 25,000</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Monthly Fee</label>
+              <strong>Free + 11.00%</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Live</label>
+              <strong>-</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Monthly Reports</label>
+              <strong>-</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-card-actions">
+          <button class="connect-btn" routerLink="/brokers-exchanges">Connect</button>
+          <button class="disconnect-btn">Disconnect</button>
+        </div>
+      </section>
+
+      <section class="dashboard-card">
+        <div class="dashboard-card-left">
+          <h2>Good</h2>
+
+          <div class="dashboard-stats-row">
+            <div class="dashboard-stat-item">
+              <label>Drawdown</label>
+              <strong>₹ 17.4K (69%)</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Min Capital</label>
+              <strong>₹ 25,000</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Monthly Fee</label>
+              <strong>Free + 11.00%</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Live</label>
+              <strong>-</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Monthly Reports</label>
+              <strong>-</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-card-actions">
+          <button class="connect-btn">Connect</button>
+          <button class="disconnect-btn">Disconnect</button>
+        </div>
+ 
+
+      </section>
+
+      <section class="dashboard-card">
+        <div class="dashboard-card-left">
+          <h2>Put</h2>
+
+          <div class="dashboard-stats-row">
+            <div class="dashboard-stat-item">
+              <label>Drawdown</label>
+              <strong>₹ 17.4K (69%)</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Min Capital</label>
+              <strong>₹ 25,000</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Monthly Fee</label>
+              <strong>Free + 11.00%</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Live</label>
+              <strong>-</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Monthly Reports</label>
+              <strong>-</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-card-actions">
+          <button class="connect-btn">Connect</button>
+          <button class="disconnect-btn">Disconnect</button>
+        </div>
+      </section>
+
+      <section class="dashboard-card">
+        <div class="dashboard-card-left">
+          <h2>Signal</h2>
+
+          <div class="dashboard-stats-row">
+            <div class="dashboard-stat-item">
+              <label>Drawdown</label>
+              <strong>₹ 17.4K (69%)</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Min Capital</label>
+              <strong>₹ 25,000</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Monthly Fee</label>
+              <strong>Free + 11.00%</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Live</label>
+              <strong>-</strong>
+            </div>
+
+            <div class="dashboard-stat-item">
+              <label>Monthly Reports</label>
+              <strong>-</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-card-actions">
+          <button class="connect-btn">Connect</button>
+          <button class="disconnect-btn">Disconnect</button>
+        </div>
+      </section>
+
+      <p class="dashboard-note">
+        Note : All subscribed strategies deployed by you can be paused /
+        exited / reactivated by the strategy creator as well to handle
+        emergency situations
+      </p>
+
+    </main>
+
+  </div>
+
+  
+  <div class="logout-overlay" *ngIf="showLogoutToast"></div>
+
+<div class="logout-modal" *ngIf="showLogoutToast">
+
+  <button class="logout-close" type="button" (click)="cancelLogout()">
+    ×
+  </button>
+
+  <div class="logout-icon-box">
+    🚪
+  </div>
+
+  <h2>Logout Account?</h2>
+
+  <p>
+    Are you sure you want to logout from your dashboard?
+  </p>
+
+  <div class="logout-actions">
+
+    <button
+      type="button"
+      class="logout-cancel-btn"
+      (click)="cancelLogout()">
+      Cancel
+    </button>
+
+    <button
+      type="button"
+      class="logout-yes-btn"
+      (click)="confirmLogout()">
+      Yes, Logout
+    </button>
+
+  </div>
+
+</div>
+
+</div>

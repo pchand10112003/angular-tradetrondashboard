@@ -1,0 +1,79 @@
+<div class="login-container">
+
+  <div class="login-box">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+      <h1>TradeTron</h1>
+
+      <p> Professional Algo Trading Dashboard  </p>
+
+      <ul>
+        <li>📈 Live Market</li>
+        <li>📊 Trading Analytics</li>
+        <li>🤖 AI Signals</li>
+        <li>⚡ Fast Execution</li>
+      </ul>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+      <h2>Sign In</h2>
+
+      <!-- EMAIL -->
+
+      <div class="input-group">
+        <label>Email</label>
+        <input  type="email"  placeholder="Enter your email" [(ngModel)]="email" autofocus>
+      </div>
+
+      <div class="error-message" *ngIf="emailError">  {{ emailError }} </div>
+
+      <!-- PASSWORD -->
+
+      <div class="input-group">
+
+        <label>Password</label>
+
+        <div class="password-box">
+
+          <input  [type]="showPassword ? 'text' : 'password'"  placeholder="Enter your password" [(ngModel)]="password" >
+
+          <span class="toggle-btn" (click)="togglePassword()">  {{ showPassword ? 'Hide' : 'Show' }} </span>
+
+        </div>
+
+      </div>
+
+      <div  class="error-message" *ngIf="passwordError">{{ passwordError }} </div>
+
+      <!-- FORGOT -->
+
+      <div class="forgot"> Forgot Password ?</div>
+
+      <!-- BUTTON -->
+      <button class="login-btn" (click)="login_check()"> Sign In </button>
+
+      <!-- DIVIDER -->
+      <div class="divider">  OR </div>
+
+      <!-- GOOGLE -->
+      <button class="google-btn">
+        <img   src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" class="social-icon" >
+        Sign in with Google
+      </button>
+
+      <!-- FACEBOOK -->
+      <button  class="google-btn facebook-btn">
+        <img   src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" class="social-icon" >
+        Sign in with Facebook
+      </button>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+ <div class="subscription-page">
+
+  <!-- TOP CARD -->
+
+  <div class="top-plan-card">
+
+    <div class="plan-header">
+
+      <h2> Tradetron Subscription </h2>
+
+      <span> Exchange Set India </span>
+      
+      <span routerLink="/dashboard" class="dashboard-link">DashBoard</span>
+
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Strategy Template</th>
+          <th>Allowed</th>
+          <th>Used</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Private</td>
+          <td>10</td>
+          <td>NIL</td>
+        </tr>
+        <tr>
+          <td>Public</td>
+          <td>NIL</td>
+          <td>NIL</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- SUBSCRIPTION CARDS -->
+
+  <div class="subscription-card" *ngFor="let item of subscriptionData">
+
+    <div class="subscription-top">
+
+      <h3> {{ item.title }} </h3>
+
+      <button> Upgrade </button>
+
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Particular</th>
+          <th>Allowed</th>
+          <th>Used</th>
+        </tr>
+        
+      </thead>
+      <tbody>
+        <tr>
+          <td>Deployed Strategies</td>
+          <td>{{ item.allowed }}</td>
+          <td>{{ item.used }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
