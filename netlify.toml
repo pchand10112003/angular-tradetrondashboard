@@ -1,5 +1,6 @@
 [build]
-  publish = "dist/angular-tradetrondashboard/browser"
+  command = "npm run build"
+  publish = "www/browser"
 
 [functions]
   directory = "netlify/functions"
