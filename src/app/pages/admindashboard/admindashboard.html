@@ -1,0 +1,121 @@
+<div class="adminboard-page">
+
+  <main class="adminboard-card">
+
+    <!-- Header -->
+    <div class="adminboard-title">
+      <div>
+        <h2>Admin Settings</h2>
+        <p>Manage buy / exit signal settings</p>
+      </div>
+
+      <!-- <button class="dashboard-btn" routerLink="/dashboard">
+        Dashboard
+      </button> -->
+    </div>
+
+    <div class="adminboard-content">
+
+      <form class="form-grid">
+
+        <!-- Buy / Exit Row -->
+        <div class="action-tabs">
+          <button type="button" class="tab-btn buy-btn" (click)="buyAdminBoard()" >Buy</button>
+          <button type="button" class="tab-btn exit-btn" routerLink="/dashboard">Exit</button>
+        </div>
+
+        <!-- Row 1 -->
+        <div class="field">
+          <label>Symbol <span>*</span></label>
+          <select [(ngModel)]="adminboard.symbol" name="symbol">
+            <option value="">Select Symbol</option>
+            <option>NSE</option>
+            <option>SAFO</option>
+            <option>BST</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Option <span>*</span></label>
+          <select [(ngModel)]="adminboard.option" name="option">
+            <option value="">Select Option</option>
+            <option>CE</option>
+            <option>PE</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Stick <span>*</span></label>
+          <select [(ngModel)]="adminboard.sticke" name="sticke">
+            <option value="">Select Stick</option>
+            <option>Demo</option>
+            <option>Demo1</option>
+          </select>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="field">
+          <label>No.Of.Lot <span>*</span></label>
+          <input 
+            type="number"
+            min="1"
+            [(ngModel)]="adminboard.no_of_lot"
+            name="no_of_lot"
+            placeholder="Enter lot count"
+          />
+        </div>
+
+        
+
+        <div class="button-area">
+          <button type="button" class="create-btn" (click)="createAdminBoard()">
+            Create
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Table -->
+      <div class="table-box" *ngIf="adminboardList.length > 0">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Symbol</th>
+              <th>Option</th>
+              <th>Stick</th>
+              <th>No.Of.Lot</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of adminboardList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ item.symbol }}</td>
+              <td>{{ item.option }}</td>
+              <td>{{ item.sticke }}</td>
+              <td>{{ item.no_of_lot }}</td>
+              <td>
+                <button class="edit-btn" (click)="editAdminBoard(i)">Edit</button>
+                <button class="delete-btn" (click)="deleteAdminBoard(i)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- Validation Popup -->
+<div class="error-dialog-overlay" *ngIf="showErrorDialog">
+  <div class="error-dialog">
+    <div class="error-icon">!</div>
+    <h3>Validation Error</h3>
+    <p>{{ errorMessage }}</p>
+    <button type="button" (click)="closeErrorDialog()">OK</button>
+  </div>
+</div>
