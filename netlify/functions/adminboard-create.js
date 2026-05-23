@@ -114,52 +114,40 @@ exports.handler = async (event) => {
     const body = event.body ? JSON.parse(event.body) : {};
 
     // INSERT
-    if (event.httpMethod === "POST") {
-      if (!body.symbol || !body.option || !body.sticke || !body.no_of_lot) {
-        return {
-          statusCode: 400,
-          body: JSON.stringify({
-            success: false,
-            message: "All fields required"
-          })
-        };
-      }
+if (event.httpMethod === "POST") {
 
-      const duplicate = await collection.findOne({
-        symbol: body.symbol,
-        option: body.option,
-        sticke: body.sticke,
-        no_of_lot: Number(body.no_of_lot)
-      });
+  if (!body.items || body.items.length === 0) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        success: false,
+        message: "Table data is empty"
+      })
+    };
+  }
 
-      if (duplicate) {
-        return {
-          statusCode: 409,
-          body: JSON.stringify({
-            success: false,
-            message: "Duplicate details already exists"
-          })
-        };
-      }
+  const now = new Date();
 
-      const result = await collection.insertOne({
-        type: body.type || "BUY",
-        symbol: body.symbol,
-        option: body.option,
-        sticke: body.sticke,
-        no_of_lot: Number(body.no_of_lot),
-        createdAt: new Date()
-      });
+  const insertData = body.items.map(item => ({
+    type: body.type || "BUY",
+    symbol: item.symbol,
+    option: item.option,
+    sticke: item.sticke,
+    no_of_lot: Number(item.no_of_lot),
+    createdAt: now
+  }));
 
-      return {
-        statusCode: 200,
-        body: JSON.stringify({
-          success: true,
-          message: "Saved successfully",
-          id: result.insertedId
-        })
-      };
-    }
+  const result = await collection.insertMany(insertData);
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      success: true,
+      message: "All table details saved successfully",
+      insertedCount: result.insertedCount
+    })
+  };
+}
 
     // UPDATE
     if (event.httpMethod === "PUT") {

@@ -166,9 +166,11 @@ createAdminBoard() {
   this.resetForm();
 }
 
+
 buyAdminBoard() {
 
-  if (!this.validateForm()) {
+  if (this.adminboardList.length === 0) {
+    this.showError('Table is empty. Please create at least one record.');
     return;
   }
 
@@ -178,19 +180,19 @@ buyAdminBoard() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      ...this.adminboard,
-      type: 'BUY'
+      type: 'BUY',
+      items: this.adminboardList
     })
   })
   .then(res => res.json())
   .then(data => {
 
     if (data.success) {
-      this.toastr.success('Admin Details Inserted Successful', 'Success');
+      alert('Buy table details saved successfully');
+      this.adminboardList = [];
       this.resetForm();
-    } 
-    else {
-      this.toastr.error(data.message, 'Admin Details Inserted Failed');
+    } else {
+      this.showError(data.message || 'Save failed');
     }
 
   })
