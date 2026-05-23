@@ -11,6 +11,13 @@ exports.handler = async (event) => {
       };
     }
 
+    if (!process.env.MONGODB_URI) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ success: false, message: "MONGODB_URI missing" })
+      };
+    }
+
     const body = JSON.parse(event.body);
 
     if (!body.symbol || !body.option || !body.sticke || !body.no_of_lot) {
@@ -43,15 +50,20 @@ exports.handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify({
         success: true,
-        message: "Data saved successfully",
+        message: "Saved Successfully",
         id: result.insertedId
       })
     };
 
   } catch (error) {
+    console.log("MongoDB Error:", error);
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ success: false, message: error.message })
+      body: JSON.stringify({
+        success: false,
+        message: error.message
+      })
     };
   }
 };
