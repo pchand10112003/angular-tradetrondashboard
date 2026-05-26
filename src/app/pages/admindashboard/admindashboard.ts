@@ -2,15 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-admindashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule],
   templateUrl: './admindashboard.html',
   styleUrl: './admindashboard.css',
 })
 export class Admindashboard implements OnInit {
+
+  // webhookUrl = 'https://coruscating-cocada-9b23ad.netlify.app/.netlify/functions/adminboard-create';
+
+  // webhookUrl = 'http://localhost:8888/.netlify/functions/tradingview-webhook';
+
+  webhookUrl =window.location.hostname === 'localhost'
+  ? 'http://localhost:8888/.netlify/functions/tradingview-webhook'
+  : 'https://coruscating-cocada-9b23ad.netlify.app/.netlify/functions/tradingview-webhook';
+
+  latestSignal: any = null;
 
   showErrorDialog = false;
   errorMessage = '';
@@ -27,28 +38,55 @@ export class Admindashboard implements OnInit {
 
   adminboardList: any[] = [];
 
-  ngOnInit() {
-    this.loadAdminBoard();
-  }
+  constructor(private http: HttpClient) {}
 
-  loadAdminBoard() {
-    // fetch('/.netlify/functions/adminboard-create')
-    fetch('https://coruscating-cocada-9b23ad.netlify.app/.netlify/functions/adminboard-create')
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          this.adminboardList = data.data;
-        }
-      })
-      .catch(() => {
-        this.showError('Failed to load table data.');
-      });
+ ngOnInit(): void {
+
+  console.log('ADMIN PAGE LOADED');
+
+  this.connectTradingview();
+
+  setInterval(() => {
+    this.getTradingviewSignal();
+  }, 3000);
+}
+
+  getTradingviewSignal() {
+
+  this.http.get<any>(this.webhookUrl).subscribe({
+    next: (res) => {
+
+      console.log('Latest Signal:', res);
+
+      this.latestSignal = res.latestSignal;
+      console.log(this.latestSignal);
+
+
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
+
+}
+
+  connectTradingview(): void {
+    console.log('Connecting webhook:', this.webhookUrl);
+
+    this.http.get<any>(this.webhookUrl).subscribe({
+      next: (res) => {
+        console.log('Webhook Connected:', res);
+        alert('Webhook connected successfully');
+      },
+      error: (err) => {
+        console.error('Webhook Error:', err);
+        alert('Webhook connection failed. Run netlify dev first.');
+      }
+    });
   }
 
   createAdminBoard() {
-    if (!this.validateForm()) {
-      return;
-    }
+    if (!this.validateForm()) return;
 
     const duplicate = this.adminboardList.some(item =>
       item.symbol === this.adminboard.symbol &&
@@ -80,28 +118,26 @@ export class Admindashboard implements OnInit {
       return;
     }
 
-    // fetch('/.netlify/functions/adminboard-create', {
-    fetch('https://coruscating-cocada-9b23ad.netlify.app/.netlify/functions/adminboard-create',{
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: 'BUY',
-        items: newRecords
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
+    this.http.post<any>(this.webhookUrl, {
+      type: 'BUY',
+      items: newRecords
+    }).subscribe({
+      next: (data) => {
+        console.log('SAVE RESPONSE:', data);
+
         if (data.success) {
           alert('Buy table details saved successfully');
-          this.adminboardList = data.data;
+          this.adminboardList = data.data || [];
           this.resetForm();
         } else {
           this.showError(data.message || 'Save failed');
         }
-      })
-      .catch(() => {
+      },
+      error: (err) => {
+        console.log('SAVE ERROR:', err);
         this.showError('Server connection failed');
-      });
+      }
+    });
   }
 
   editAdminBoard(index: number) {
@@ -119,9 +155,7 @@ export class Admindashboard implements OnInit {
   }
 
   updateAdminBoard() {
-    if (!this.validateForm()) {
-      return;
-    }
+    if (!this.validateForm()) return;
 
     if (this.editIndex === null) {
       this.showError('Please select a record to update.');
@@ -135,29 +169,25 @@ export class Admindashboard implements OnInit {
       return;
     }
 
-    fetch('/.netlify/functions/adminboard-create', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: this.editId,
-        ...this.adminboard
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
+    this.http.put<any>(this.webhookUrl, {
+      id: this.editId,
+      ...this.adminboard
+    }).subscribe({
+      next: (data) => {
         if (data.success) {
           alert('Updated successfully');
-          this.loadAdminBoard();
           this.resetForm();
           this.editIndex = null;
           this.editId = null;
         } else {
           this.showError(data.message || 'Update failed');
         }
-      })
-      .catch(() => {
+      },
+      error: (err) => {
+        console.log('UPDATE ERROR:', err);
         this.showError('Server connection failed');
-      });
+      }
+    });
   }
 
   deleteAdminBoard(index: number) {
@@ -168,22 +198,25 @@ export class Admindashboard implements OnInit {
       return;
     }
 
-    fetch('/.netlify/functions/adminboard-create', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: item._id })
-    })
-      .then(res => res.json())
-      .then(data => {
+    this.http.delete<any>(this.webhookUrl, {
+      body: { id: item._id }
+    }).subscribe({
+      next: (data) => {
         if (data.success) {
-          this.loadAdminBoard();
+          this.adminboardList.splice(index, 1);
         } else {
           this.showError(data.message || 'Delete failed');
         }
-      })
-      .catch(() => {
+      },
+      error: (err) => {
+        console.log('DELETE ERROR:', err);
         this.showError('Server connection failed');
-      });
+      }
+    });
+  }
+
+  ConnectExchange() {
+    console.log('Connecting The Exchange');
   }
 
   validateForm(): boolean {

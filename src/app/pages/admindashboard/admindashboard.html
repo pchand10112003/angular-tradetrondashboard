@@ -56,27 +56,31 @@
         <!-- Row 2 -->
         <div class="field">
           <label>No.Of.Lot <span>*</span></label>
-          <input 
-            type="number"
-            min="1"
-            [(ngModel)]="adminboard.no_of_lot"
-            name="no_of_lot"
-            placeholder="Enter lot count"
-          />
+          <input   type="number" min="1"
+            [(ngModel)]="adminboard.no_of_lot" name="no_of_lot"
+            placeholder="Enter lot count" />
         </div>
-
-        
 
         <div class="button-area">
           <button type="button" class="create-btn" (click)="createAdminBoard()">
             Create
           </button>
-        </div>
+          
+          <button type="button" class="create-btn" (click)="connectTradingview()"> Connect </button>
+<!-- <p style="color:red; font-weight:600;">
+  Webhook URL: {{ webhookUrl }}
+</p> -->
+
+
+        </div>        
 
       </form>
 
+      <p style="color:red;font-weight:bold;">
+  Total Records: {{ adminboardList.length }}
+</p>
       <!-- Table -->
-      <div class="table-box" *ngIf="adminboardList.length > 0">
+     <div class="table-box" *ngIf="adminboardList.length > 0">
         <table>
           <thead>
             <tr>
@@ -99,6 +103,8 @@
               <td>
                 <button class="edit-btn" (click)="editAdminBoard(i)">Edit</button>
                 <button class="delete-btn" (click)="deleteAdminBoard(i)">Delete</button>
+                 <button class="edit-btn">Buy</button>
+                <button class="delete-btn">Sell</button>                
               </td>
             </tr>
           </tbody>

@@ -149,6 +149,8 @@ select:focus{
   font-weight:900;
   cursor:pointer;
   box-shadow:0 14px 28px rgba(37,99,235,0.28);
+  margin-right:15px;
+  /* gap:70px; */
 }
 
 .table-box{
@@ -253,6 +255,43 @@ td{
   color:white;
   font-weight:800;
   cursor:pointer;
+}
+
+
+.adminboard-page {
+  min-height: 100vh;
+  height: auto !important;
+  overflow-y: auto !important;
+  padding-bottom: 80px;
+}
+
+.adminboard-card {
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+.adminboard-content {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.form-grid {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.table-box {
+  display: block !important;
+  visibility: visible !important;
+  margin-top: 35px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-box table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 @media(max-width:900px){
